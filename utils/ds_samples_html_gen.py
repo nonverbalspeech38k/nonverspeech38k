@@ -57,11 +57,17 @@ thead_html += '</thead>'
 
 for text, audio_path, audio_segment in zip(text_list, audio_path_list, audio_segment_list):
     # if the text contains < or >, highlight the content within <>
-    if '<' in text or '>' in text or '[' in text or ']' in text:
-        text = text.replace('[', '&lt;').replace(']', '&gt;')
-        text = text.replace('<', '&lt;').replace('>', '&gt;')
-        text = text.replace('&lt;', '<span style="color: red;">&lt;')
-        text = text.replace('&gt;', '&gt;</span>')
+    # if '<' in text or '>' in text or '[' in text or ']' in text:
+        # text = text.replace('[', '&lt;').replace(']', '&gt;')
+        # text = text.replace('<', '&lt;').replace('>', '&gt;')
+        # text = text.replace('&lt;', '<span style="color: red;">&lt;')
+        # text = text.replace('&gt;', '&gt;</span>')
+        
+    text = text.replace('[', '<span style="color: red;">[')
+    text = text.replace(']', ']</span>')
+    text = text.replace('<B>', '<span style="color: red;">&lt;B&gt;</span>')
+    text = text.replace('</B>', '<span style="color: red;">&lt;/B&gt;</span>')
+    
     row = f'  <tr>\n'
     row += f'    <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">\n'
     row += f'      {text}\n'

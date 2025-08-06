@@ -6,7 +6,7 @@ models = {
     "capspeech": "F5-TTS + <br> Capspeech", "nonverbaltts": "F5-TTS + <br> NonVerbalTTS", "nonverbalspeech38k": "F5-TTS + <br> NonVerbalSpeech-38K (Ours)"
 }
 
-language = "zh"  # Change to "zh" for Chinese
+language = "en"  # Change to "zh" for Chinese
 
 transcript_path = f"./audios/{language}/transcript.txt"
 
@@ -54,10 +54,12 @@ thead_html += '</thead>'
 
 for filename, text in transcript.items():
     # if the text contains < or >, highlight it the content within <>
+    assert "<" in text or ">" in text, f"Text does not contain < or >: {text}"
     if '<' in text or '>' in text:
-        text = text.replace('<', '&lt;').replace('>', '&gt;')
-        text = text.replace('&lt;', '<span style="color: red;">&lt;')
-        text = text.replace('&gt;', '&gt;</span>')
+        # text = text.replace('<', '&lt;').replace('>', '&gt;')
+        # text = text.replace('&lt;', '<span style="color: red;">&lt;')
+        # text = text.replace('&gt;', '&gt;</span>')
+        text = text.replace('<', '<span style="color: red;">[').replace('>', ']</span>')
     row = f'  <tr>\n'
     row += f'    <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">\n'
     row += f'      {text}\n'
