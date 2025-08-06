@@ -1715,8 +1715,22 @@
         <p>More information about our NonVerbalSpeech-38K dataset is available on <a href="https://huggingface.co/datasets/nonverbalspeech/nonverbalspeech38k">Hugging Face</a>.</p>
         <b>Note:</b>  
         <ul>
-          <li>The &lt;B&gt; and &lt;/B&gt; tags indicate that non-verbal expressions overlap with spoken words.</li>
+          <li>The <span style="color:red;">&lt;B&gt;</span>; and <span style="color:red;">&lt;/B&gt;</span> tags indicate that non-verbal expressions overlap with spoken words.</li>
           <li>Due to limitations in ASR-based timestamps, slight misalignments may exist between the audio and captions. However, the detected non-verbal segments themselves are accurate. We plan to enhance alignment quality in future updates.</li>
+          <li>
+            In the current version, we extend overlapping non-verbal expressions to the sub-sentence level to reduce misalignment issues. For example, we modify:
+            <br>
+            <i>李渊看着秦琼心说，这是我的金殿哪，他在这儿就指着我两个儿子，让我两个儿子心服口服。哎呀。李渊心说，大唐<span style="color:red;">&lt;sniff&gt;&lt;B&gt;</span>江山<span style="color:red;">&lt;/B&gt;</span>要紧，我也不能再包庇我的两个儿子了。哎呀，是世民，你也给我跪下。</i>
+            <br>
+            to:
+            <br>
+            <i>李渊看着秦琼心说，这是我的金殿哪，他在这儿就指着我两个儿子，让我两个儿子心服口服。哎呀。李渊心说，<span style="color:red;">&lt;sniff&gt;&lt;B&gt;</span>大唐江山要紧<span style="color:red;">&lt;/B&gt;</span>，我也不能再包庇我的两个儿子了。哎呀，是世民，你也给我跪下。</i>
+            <br>
+            This strategy aims to improve alignment between captions and audio. However, we observe that such modifications do not significantly enhance alignment quality.
+            <br>
+            To support further research, we also release the <b>Non-Verbal Regions.</b> detected by our model, which can be used to re-annotate the dataset with more accurate timestamps.
+          </li>
+            
         </ul>
         
 		<div class="table-responsive pt-3">
