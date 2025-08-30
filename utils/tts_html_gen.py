@@ -3,7 +3,7 @@ from pathlib import Path
 
 models = {
     "ref": "Prompt", "dia": "Dia", "cosyvoice2": "CosyVoice2", "f5tts": "F5-TTS",
-    "capspeech": "F5-TTS + <br> Capspeech", "nonverbaltts": "F5-TTS + <br> NonVerbalTTS", "nonverbalspeech38k": "F5-TTS + <br> NonVerbalSpeech-38K (Ours)"
+    "capspeech": "F5-TTS + <br> Capspeech", "nonverbaltts": "F5-TTS + <br> NonVerbalTTS", "nonverbalspeech38k": "F5-TTS + <br> NonVerbalSpeech-38K (Ours)", "refined_aligned": "F5-TTS + <br> NonVerbalSpeech-38K (Ours) + <br> Refined + Aligned"
 }
 
 language = "en"  # Change to "zh" for Chinese

@@ -5,7 +5,7 @@ import sys
 
 models = {
     "nonverbaltts": "GT (NonVerbalTTS)", "whisper_large_v3": "Whisper-Large-V3", "qwen2audio": "Qwen2-Audio", 
-    "capspeech": "Qwen2-Audio + <br> CapSpeech", "nonverbalspeech38k": "Qwen2-Audio + <br> NonVerbalSpeech38K (Ours)",
+    "capspeech": "Qwen2-Audio + <br> CapSpeech", "nonverbalspeech38k": "Qwen2-Audio + <br> NonVerbalSpeech38K (Ours)", "refined_aligned": "Qwen2-Audio + <br> NonVerbalSpeech-38K (Ours) + <br> Refined + Aligned"
 }
 
 file_dir = "./texts"

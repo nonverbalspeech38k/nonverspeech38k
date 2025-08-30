@@ -32,7 +32,8 @@
         <p>
             <!-- <a href="blank">Hugging Face [coming soon]</a> | -->
             <a href="https://github.com/nonverbalspeech38k/nonverspeech38k">GitHub Repo</a> |
-            <a href="https://huggingface.co/datasets/nonverbalspeech/nonverbalspeech38k">Hugging Face</a>
+            <a href="https://huggingface.co/datasets/nonverbalspeech/nonverbalspeech38k">Hugging Face</a> |
+            <a href="#news", style="color: red;">News</a>
             <!-- <a href="blank" style="color: gray;">Hugging Face [coming soon]</a> -->
         </p>
 	</div>
@@ -42,12 +43,12 @@
 	<p>
 	<b>Contents</b>
       <ul>
+        <li><a href="#dataset-samples">Dataset Samples</a></li>
         <li><a href="#pipeline-overview">Pipeline Overview</a></li>
         <li><a href="#non-verbal-speech-generation-zh">Non-Verbal Speech Generation (ZH)</a></li>
         <li><a href="#non-verbal-speech-generation-en">Non-Verbal Speech Generation (EN)</a></li>
 		<li><a href="#non-verbal-speech-understanding">Non-Verbal Speech Understanding</a></li>
         <!-- <li><a href="#dataset-overview">Dataset Overview</a></li> -->
-		<li><a href="#dataset-samples">Dataset Samples</a></li>
       </ul>
 	</p>
 
@@ -56,6 +57,564 @@
 </div>
 
 
+
+<!-- non verbal dataset samples -->
+<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">
+	<h2 id="dataset-samples" style="text-align: center;">NonVerbalSpeech-38K dataset samples</h2>
+        <p>More information about our NonVerbalSpeech-38K dataset is available on <a href="https://huggingface.co/datasets/nonverbalspeech/nonverbalspeech38k">Hugging Face</a>.</p>
+        
+        <h2 id="news"><b style="color: crimson;">News:</b></h2>  
+
+        <p>
+          <b>[2025.08.31]</b> We have largely resolved the caption–audio misalignment issue caused by inaccurate ASR timestamps.  
+          More details can be found on: 
+          <a href="https://huggingface.co/datasets/nonverbalspeech/nonverbalspeech38k">Hugging Face</a>.
+        </p>
+        
+        <p><b>Example:</b></p>
+        <p>
+          <i>
+            "李渊看着秦琼心说，这是我的金殿哪，他在这儿就指着我两个儿子，让我两个儿子心服口服。哎呀。李渊心说，
+            <span style="color:red;">[sniff]&lt;B&gt;</span>大唐江山要紧<span style="color:red;">&lt;/B&gt;</span>，
+            我也不能再包庇我的两个儿子了。哎呀，是世民，你也给我跪下。" (<b>[2025.08.06 version]</b>, although extended to the sub-sentence level, it remains misaligned with the audio with respect to the tag <span style="color:red;">[sniff]</span>.)
+          </i>
+          <p><b>changed to:</b></p>
+          <i>
+            "李渊看着秦琼心说，这是我的金殿哪，他在这儿就指着我两个儿子，让我两个儿子心服口服。
+            <span style="color:red;">[sniff]</span>哎呀。李渊心说，大唐江山要紧，我也不能再包庇我的两个儿子了，
+            二儿是民，你也给我跪下。" (This is fully aligned with the audio with regard to the tag <span style="color:red;">[sniff]</span>.)
+          </i>
+        </p>
+        
+        <p>
+          The table below presents additional comparative examples.  
+          <b>Original</b> refers to the text from the initial release of the dataset on <b>2025.08.06</b>,  
+          while <b>Refined+Aligned</b> represents our recent update addressing caption–audio misalignment.
+        </p>
+
+        <p>
+            We also conducted additional experiments, and the results indicate that this update yields a certain performance improvement.
+            For further experimental results, please refer to <a href="https://huggingface.co/datasets/nonverbalspeech/nonverbalspeech38k">Hugging Face</a>. Inference examples are provided below (see the last column or last row):
+            <li><a href="#non-verbal-speech-generation-zh">Non-Verbal Speech Generation (ZH)</a></li>
+            <li><a href="#non-verbal-speech-generation-en">Non-Verbal Speech Generation (EN)</a></li>
+            <li><a href="#non-verbal-speech-understanding">Non-Verbal Speech Understanding</a></li>
+        </p>
+        
+        <hr>
+        <p>
+        <b>[2025.08.06]</b> Due to ASR-based timestamp limitations, slight misalignments may still exist between audio and captions.  
+        However, the detected non-verbal segments themselves are accurate. We plan to further improve alignment in future updates.
+        In the current version, we extend overlapping non-verbal expressions to the sub-sentence level to mitigate misalignment.  
+        </p>
+        <p><b>Example:</b></p>
+        <p>
+        <i>
+            李渊看着秦琼心说，这是我的金殿哪，他在这儿就指着我两个儿子，让我两个儿子心服口服。哎呀。李渊心说，
+            大唐<span style="color:red;">[sniff]&lt;B&gt;</span>江山<span style="color:red;">&lt;/B&gt;</span>要紧，
+            我也不能再包庇我的两个儿子了。哎呀，是世民，你也给我跪下。
+        </i>
+        <p><b>changed to:</b></p>
+        <i>
+            李渊看着秦琼心说，这是我的金殿哪，他在这儿就指着我两个儿子，让我两个儿子心服口服。哎呀。李渊心说，
+            <span style="color:red;">[sniff]&lt;B&gt;</span>大唐江山要紧<span style="color:red;">&lt;/B&gt;</span>，
+            我也不能再包庇我的两个儿子了。哎呀，是世民，你也给我跪下。
+        </i>
+        </p>
+        <p>
+        This strategy aims to improve alignment between captions and audio. However, we observe that such modifications do not significantly enhance alignment quality.
+        To support further research, we also release the <b>Non-Verbal Regions</b> detected by our model.  
+        These can be used for re-annotation with more precise timestamps.
+        </p>
+        <hr>
+        <h2><b style="color: crimson;">Note:</b></h2>   
+        <ul>
+          <li>
+            The <span style="color:red;">&lt;B&gt;</span> and <span style="color:red;">&lt;/B&gt;</span> tags indicate that non-verbal expressions overlap with spoken words.
+          </li>
+        </ul>
+        
+        
+		<div class="table-responsive pt-3">
+            <div style="overflow-x: auto; position: relative;">
+                <!-- <table class="table table-hover pt-2" style="min-width: 1200px;"> -->
+                <table class="table table-hover pt-2" style="table-layout: fixed; width: 100%; min-width: 1200px;">
+                    <thead>
+                        <tr>
+                          <th style="width: 190px; text-align: center; background-color: white;">Audio</th>
+                          <th style="width: 190px; text-align: center; background-color: white;">Non-Verbal Segments Detected</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/snore/1_snore.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/snore/1_snore_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> <span style="color: red;">[snore]</span>呃，乌托马乌托马他要跟我们去吗？你要跟我们去吗？</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> <span style="color: red;">[snore]</span>嗯，呃，吴托玛吴托玛，他要跟我们去吗？你要跟我们去吗？</div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/snore/2_snore.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/snore/2_snore_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> 到门口，这蹲着摘耳朵，再次偷听，就听屋里的。 <span style="color: red;">[snore]</span></div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> 到门口这蹲着摘耳朵，再次偷听，就听屋里头。<span style="color: red;">[snore]</span></div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/throatclearing/1_throatclearing.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/throatclearing/1_throatclearing_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> don't thank me yet you must hurry saria sunrise will be here soon <span style="color: red;">[throatclearing]</span></div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> Don't thank me yet. You must hurry, Saria. Sunrise will be here soon. <span style="color: red;">[throatclearing]</span></div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/throatclearing/2_throatclearing.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/throatclearing/2_throatclearing_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> 我是不是随性过头了？<span style="color: red;">[throatclearing]</span>第一个环节是回忆过去。</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> 我是不是随性过头了？<span style="color: red;">[throatclearing]</span>第一个环节是回忆过去。</div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/crying/1_crying.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/crying/1_crying_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> 他骗了我好几十万呢，我的棺材本全都搭进去了，然后然后他人就不见了，到警也找不到。<span style="color: red;">[crying]</span></div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> 他骗了我好几十万呢，我的棺材本全都搭进去了，然后然后他人就不见了，报警也找不到。<span style="color: red;">[crying]</span></div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/crying/2_crying.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/crying/2_crying_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> <span style="color: red;">[crying]</span>不要，王林说好的，我俩一块走的，我不要一个人走。</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> <span style="color: red;">[crying]</span>不要，王林说好的，我俩一块走的，我不要一个人走。</div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/breath/1_breath.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/breath/1_breath_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> 啊，这都画的啥呀，<span style="color: red;">[breath]</span>不是你是小学生上语文课吗？又是卡通小人，又是图句号的。哎呀，行，男主名字，后面还写了个全剧最帅。</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> 啊，这都画的啥呀？<span style="color: red;">[breath]</span>哇，你是小学生上语文课吗？又是卡通小人，又是图句号的。哎呀，行，男主名字后面还写了个全剧最帅。</div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/breath/2_breath.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/breath/2_breath_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> <span style="color: red;">[breath]</span>小孩子的把戏水做的枪也想杀人。</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> <span style="color: red;">[breath]</span>小孩子的把戏水做的枪也想杀人。</div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/sniff/1_sniff.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/sniff/1_sniff_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> 李渊看着秦琼心说，这是我的金殿哪，他在这儿就指着我两个儿子，让我两个儿子心服口服。哎呀。李渊心说， <span style="color: red;">[sniff]</span><span style="color: red;">&lt;B&gt;</span>大唐江山要紧，<span style="color: red;">&lt;/B&gt;</span>我也不能再包庇我的两个儿子了。哎呀，是世民，你也给我跪下。</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> 李渊看着秦琼心说，这是我的金殿哪，他在这儿就指着我两个儿子，让我两个儿子心服口服。<span style="color: red;">[sniff]</span>哎呀。李渊心说，大唐江山要紧，我也不能再包庇我的两个儿子了，二儿是民，你也给我跪下。</div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/sniff/2_sniff.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/sniff/2_sniff_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> <span style="color: red;">[sniff]</span>说什么呢？我是说韩长老青通药理，韩家又一直盯着我不放，有没有可能是冲着我身上的某种东西来的。</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> <span style="color: red;">[sniff]</span>说说什么呢？我是说韩长老精通药理，韩家又一直盯着我不放，有没有可能是冲着我身上的某种东西来的。</div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/laughing/1_laughing.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/laughing/1_laughing_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> <span style="color: red;">[laughing]</span>我们来助早齿大人一臂之力。</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> <span style="color: red;">[laughing]</span>我们来助早齿大人一臂之力嗯。</div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/laughing/2_laughing.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/laughing/2_laughing_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> 女娲说完一笑，便直接转身离开了后院。而蚩尤则是愣住了片刻，<span style="color: red;">[laughing]</span><span style="color: red;">&lt;B&gt;</span>随即仰天大笑。<span style="color: red;">&lt;/B&gt;</span> 女娲，你果然厉害呀。</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> 女娲说完一笑，便直接转身离开了后院。而蚩尤则是愣住了片刻，随即仰天大笑。<span style="color: red;">[laughing]</span>女娲，你果然厉害呀。</div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/coughing/1_coughing.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/coughing/1_coughing_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> 先生，您好歹吃点东西吧，再难受，也不能不吃东西。<span style="color: red;">[coughing]</span></div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> 先生，您好歹吃点东西吧，再难受，也不能不吃东西。<span style="color: red;">[coughing]</span></div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/coughing/2_coughing.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/coughing/2_coughing_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> 你去嗯嗯大人，我该注意些什么？<span style="color: red;">[coughing]</span></div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> 你去嗯嗯大人，我该注意些什么？<span style="color: red;">[coughing]</span></div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/gasp/1_gasp.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/gasp/1_gasp_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> Heya, kids. The vet reported your dog is a biter, so I'm supposed to wait until animal control gets here to take him away. <span style="color: red;">[gasp]</span></div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> Hey, kids, the vet reported your dog is a biter, so I'm supposed to wait until animal control gets here to take him away. <span style="color: red;">[gasp]</span><span style="color: red;">&lt;B&gt;</span> What? <span style="color: red;">&lt;/B&gt;</span></div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/gasp/2_gasp.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/gasp/2_gasp_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> <span style="color: red;">[gasp]</span><span style="color: red;">&lt;B&gt;</span> 这是怎么回事？<span style="color: red;">&lt;/B&gt;</span></div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> 这是怎么回事<span style="color: red;">[gasp]</span>啊，你了。</div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/yawn/1_yawn.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/yawn/1_yawn_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> <span style="color: red;">[yawn]</span>好久没有熬夜了，好困啊。</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> <span style="color: red;">[yawn]</span>啊，嗯好久没有熬夜了，好困啊。</div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/yawn/2_yawn.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/yawn/2_yawn_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> <span style="color: red;">[yawn]</span>妖怪，你才是妖怪呢。</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> <span style="color: red;">[yawn]</span>啊，妖怪，你才是妖怪呢。</div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/sigh/1_sigh.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/sigh/1_sigh_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> 杨总，我知道数的都是雷政委的名字，没关系，以我的身份没有权利，拥有什么研究成果的，让你受委屈了。没事的，<span style="color: red;">[sigh]</span><span style="color: red;">&lt;B&gt;</span>能在红暗基地做研究，<span style="color: red;">&lt;/B&gt;</span>能看到这么丰富的资料。</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> 杨总，我知道数的都是雷政委的名字，没关系，以我的身份没有权利，拥有什么研究成果的，<span style="color: red;">[sigh]</span>让你受委屈了。没事的，能在红暗基地做研究，能看到这么丰富的资料。</div>
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/sigh/2_sigh.wav" />
+                            </audio>
+                          </td>
+                          <td style="text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="./dataset_demos/sigh/2_sigh_segment.wav" />
+                            </audio>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b style="white-space: pre;">                    Original:</b> <span style="color: red;">[sigh]</span><span style="color: red;">&lt;B&gt;</span> They say time flies when you're having fun, <span style="color: red;">&lt;/B&gt;</span> so...</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">
+                            <div><b>Refined + Aligned:</b> <span style="color: red;">[sigh]</span> They say time flies when you're having fun, so...</div>
+                          </td>
+                        </tr>
+                      
+                      </tbody>
+                      
+                      
+                </table>
+            </div>
+        </div>
+</div>
+
+
+<!-- pipeline -->
 <div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">
 	<h2 id="pipeline-overview" style="text-align: center;">Pipeline Overview</h2>
 	<body>
@@ -77,6 +636,9 @@
 
 </div>
 
+
+
+
 <!-- zh non verbal tts -->
 <div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">
 	<h2 id="non-verbal-speech-generation-zh" style="text-align: center;">Non-Verbal Speech Generation (ZH)</h2>
@@ -97,6 +659,7 @@
                           <th style="vertical-align: middle; text-align: center; width: 200px;">F5-TTS + <br> Capspeech</th>
                           <th style="vertical-align: middle; text-align: center; width: 200px;">F5-TTS + <br> NonVerbalTTS</th>
                           <th style="vertical-align: middle; text-align: center; width: 200px;">F5-TTS + <br> NonVerbalSpeech-38K (Ours)</th>
+                          <th style="vertical-align: middle; text-align: center; width: 200px;">F5-TTS + <br> NonVerbalSpeech-38K (Ours) + <br> Refined + Aligned</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -143,6 +706,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/zh/nonverbalspeech38k/10003257-00000033_laughing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/10003257-00000033_laughing.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -193,6 +762,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/00004551-00000110_sigh.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -237,6 +812,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/zh/nonverbalspeech38k/00012033-00000049_throatclearing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/00012033-00000049_throatclearing.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -287,6 +868,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/00004684-00000069_sniff.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -331,6 +918,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/zh/nonverbalspeech38k/00004774-00000058_breath.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/00004774-00000058_breath.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -381,6 +974,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/00013317-00000648_throatclearing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -425,6 +1024,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/zh/nonverbalspeech38k/00004677-00000103_sniff.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/00004677-00000103_sniff.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -475,6 +1080,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/00004506-00000069_sigh.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -519,6 +1130,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/zh/nonverbalspeech38k/00004597-00000012_coughing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/00004597-00000012_coughing.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -569,6 +1186,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/00004786-00000025_breath.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -613,6 +1236,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/zh/nonverbalspeech38k/00013648-00000277_throatclearing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/00013648-00000277_throatclearing.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -663,6 +1292,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/00004595-00000033_coughing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -707,6 +1342,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/zh/nonverbalspeech38k/10002481-00000044_laughing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/10002481-00000044_laughing.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -757,6 +1398,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/10002309-00000033_laughing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -804,10 +1451,14 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/zh/refined_aligned/00004599-00000114_coughing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                       </tbody>
-                      
-                      
                 </table>
             </div>
         </div>
@@ -833,6 +1484,7 @@
                           <th style="vertical-align: middle; text-align: center; width: 200px;">F5-TTS + <br> Capspeech</th>
                           <th style="vertical-align: middle; text-align: center; width: 200px;">F5-TTS + <br> NonVerbalTTS</th>
                           <th style="vertical-align: middle; text-align: center; width: 200px;">F5-TTS + <br> NonVerbalSpeech-38K (Ours)</th>
+                          <th style="vertical-align: middle; text-align: center; width: 200px;">F5-TTS + <br> NonVerbalSpeech-38K (Ours) + <br> Refined + Aligned</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -879,6 +1531,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/en/nonverbalspeech38k/common_voice_en_15265-common_voice_en_15266_laughing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_15265-common_voice_en_15266_laughing.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -929,6 +1587,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_19867710-common_voice_en_19867712_sigh.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -973,6 +1637,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/en/nonverbalspeech38k/common_voice_en_19049396-common_voice_en_19049393_throatclearing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_19049396-common_voice_en_19049393_throatclearing.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -1023,6 +1693,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_63703-common_voice_en_63702_breath.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -1067,6 +1743,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/en/nonverbalspeech38k/common_voice_en_125386-common_voice_en_125389_laughing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_125386-common_voice_en_125389_laughing.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -1117,6 +1799,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_103675-common_voice_en_103676_laughing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -1161,6 +1849,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/en/nonverbalspeech38k/common_voice_en_18993020-common_voice_en_18993021_throatclearing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_18993020-common_voice_en_18993021_throatclearing.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -1211,6 +1905,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_21621452-common_voice_en_21621454_coughing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -1255,6 +1955,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/en/nonverbalspeech38k/common_voice_en_509177-common_voice_en_509186_breath.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_509177-common_voice_en_509186_breath.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -1305,6 +2011,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_19083094-common_voice_en_19083091_throatclearing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -1349,6 +2061,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/en/nonverbalspeech38k/common_voice_en_21538043-common_voice_en_21538045_coughing.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_21538043-common_voice_en_21538045_coughing.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -1399,6 +2117,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_21184954-common_voice_en_21184958_sigh.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -1443,6 +2167,12 @@
                           <td style="vertical-align: middle; text-align: center;">
                             <audio controls style="width: 190px;">
                               <source src="audios/en/nonverbalspeech38k/common_voice_en_25563964-common_voice_en_25563960_sniff.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_25563964-common_voice_en_25563960_sniff.wav" />
                               Your browser does not support the audio element.
                             </audio>
                           </td>
@@ -1493,6 +2223,12 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_364081-common_voice_en_364079_breath.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                         <tr>
                           <td style="width: 220px; vertical-align: middle; text-align: center; position: sticky; left: 0; background-color: white; z-index: 1;">
@@ -1540,9 +2276,14 @@
                               Your browser does not support the audio element.
                             </audio>
                           </td>
+                          <td style="vertical-align: middle; text-align: center;">
+                            <audio controls style="width: 190px;">
+                              <source src="audios/en/refined_aligned/common_voice_en_25271639-common_voice_en_25271640_sniff.wav" />
+                              Your browser does not support the audio element.
+                            </audio>
+                          </td>
                         </tr>
                       </tbody>
-                      
                   
                 </table>
             </div>
@@ -1591,6 +2332,10 @@
                         <td style="width: 250px; vertical-align: middle; text-align: center;"><span style="color: red;">[laughing]</span>  Yeah, I feel comfortable around people.</td>
                       </tr>
                       <tr>
+                        <td style="width: 100px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">Qwen2-Audio + <br> NonVerbalSpeech-38K (Ours) + <br> Refined + Aligned</td>
+                        <td style="width: 250px; vertical-align: middle; text-align: center;"><span style="color: red;">[laughing]</span> Yeah, I feel comfortable around people.</td>
+                      </tr>
+                      <tr>
                         <td colspan="2" style="width: 100px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
                           <audio controls style="width: 250px;">
                             <source src="texts/audios//1.wav" />
@@ -1617,6 +2362,10 @@
                       <tr>
                         <td style="width: 100px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">Qwen2-Audio + <br> NonVerbalSpeech38K (Ours)</td>
                         <td style="width: 250px; vertical-align: middle; text-align: center;">as much and more in other films but she&#x27;s very much <span style="color: red;">[coughing]</span></td>
+                      </tr>
+                      <tr>
+                        <td style="width: 100px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">Qwen2-Audio + <br> NonVerbalSpeech-38K (Ours) + <br> Refined + Aligned</td>
+                        <td style="width: 250px; vertical-align: middle; text-align: center;">as much in and more in other films, but she&#x27;s very much... <span style="color: red;">[coughing]</span></td>
                       </tr>
                       <tr>
                         <td colspan="2" style="width: 100px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
@@ -1647,6 +2396,10 @@
                         <td style="width: 250px; vertical-align: middle; text-align: center;">Yeah, I had bronchitis. <span style="color: red;">[laughing]</span>  It wasn&#x27;t much fun.</td>
                       </tr>
                       <tr>
+                        <td style="width: 100px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">Qwen2-Audio + <br> NonVerbalSpeech-38K (Ours) + <br> Refined + Aligned</td>
+                        <td style="width: 250px; vertical-align: middle; text-align: center;">Yeah, I had bronchitis. <span style="color: red;">[laughing]</span> It wasn&#x27;t much fun.</td>
+                      </tr>
+                      <tr>
                         <td colspan="2" style="width: 100px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
                           <audio controls style="width: 250px;">
                             <source src="texts/audios//3.wav" />
@@ -1673,6 +2426,10 @@
                       <tr>
                         <td style="width: 100px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">Qwen2-Audio + <br> NonVerbalSpeech38K (Ours)</td>
                         <td style="width: 250px; vertical-align: middle; text-align: center;">being told that I have a responsibility. <span style="color: red;">[laughing]</span>  I&#x27;m like, I want it to be my idea and people are like...</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 100px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">Qwen2-Audio + <br> NonVerbalSpeech-38K (Ours) + <br> Refined + Aligned</td>
+                        <td style="width: 250px; vertical-align: middle; text-align: center;">told that I have a responsibility. <span style="color: red;">[laughing]</span> You know, I&#x27;m like, I want it to be my idea when people are like...</td>
                       </tr>
                       <tr>
                         <td colspan="2" style="width: 100px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
@@ -1702,402 +2459,18 @@
                         <td style="width: 100px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">Qwen2-Audio + <br> NonVerbalSpeech38K (Ours)</td>
                         <td style="width: 250px; vertical-align: middle; text-align: center;">Averton played well in the second half, but I think we <span style="color: red;">[breath]</span>  win</td>
                       </tr>
+                      <tr>
+                        <td style="width: 100px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">Qwen2-Audio + <br> NonVerbalSpeech-38K (Ours) + <br> Refined + Aligned</td>
+                        <td style="width: 250px; vertical-align: middle; text-align: center;">Everton played well in the second half, but I think we <span style="color: red;">[breath]</span> win.</td>
+                      </tr>
                     </tbody>
-                    
+                                      
                     
                 </table>
             </div>
         </div>
 </div>
 
-<!-- non verbal dataset samples -->
-<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">
-	<h2 id="dataset-samples" style="text-align: center;">NonVerbalSpeech-38K dataset samples</h2>
-        <p>More information about our NonVerbalSpeech-38K dataset is available on <a href="https://huggingface.co/datasets/nonverbalspeech/nonverbalspeech38k">Hugging Face</a>.</p>
-        <b>Note:</b>  
-        <ul>
-          <li>The <span style="color:red;">&lt;B&gt;</span>; and <span style="color:red;">&lt;/B&gt;</span> tags indicate that non-verbal expressions overlap with spoken words.</li>
-          <li>Due to limitations in ASR-based timestamps, slight misalignments may exist between the audio and captions. However, the detected non-verbal segments themselves are accurate. We plan to enhance alignment quality in future updates.</li>
-          <li>
-            In the current version, we extend overlapping non-verbal expressions to the sub-sentence level to reduce misalignment issues. For example, we modify:
-            <br>
-            <i>李渊看着秦琼心说，这是我的金殿哪，他在这儿就指着我两个儿子，让我两个儿子心服口服。哎呀。李渊心说，大唐<span style="color:red;">[sniff]&lt;B&gt;</span>江山<span style="color:red;">&lt;/B&gt;</span>要紧，我也不能再包庇我的两个儿子了。哎呀，是世民，你也给我跪下。</i>
-            <br>
-            to:
-            <br>
-            <i>李渊看着秦琼心说，这是我的金殿哪，他在这儿就指着我两个儿子，让我两个儿子心服口服。哎呀。李渊心说，<span style="color:red;">[sniff]&lt;B&gt;</span>大唐江山要紧<span style="color:red;">&lt;/B&gt;</span>，我也不能再包庇我的两个儿子了。哎呀，是世民，你也给我跪下。</i>
-            <br>
-            This strategy aims to improve alignment between captions and audio. However, we observe that such modifications do not significantly enhance alignment quality.
-            <br>
-            To support further research, we also release the <b>Non-Verbal Regions.</b> detected by our model, which can be used to re-annotate the dataset with more accurate timestamps.
-          </li>
-            
-        </ul>
-        
-		<div class="table-responsive pt-3">
-            <div style="overflow-x: auto; position: relative;">
-                <!-- <table class="table table-hover pt-2" style="min-width: 1200px;"> -->
-                <table class="table table-hover pt-2" style="table-layout: fixed; width: 100%; min-width: 1200px;">
-                    <thead>
-                        <tr>
-                          <th style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 2;">
-                            Caption
-                          </th>
-                          <th style="width: 190px; vertical-align: middle; text-align: center; background-color: white; z-index: 2;">
-                            Audio
-                          </th>
-                          <th style="width: 190px; vertical-align: middle; text-align: center; background-color: white; z-index: 2;">
-                            Non-Verbal Segments Detected
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            <span style="color: red;">[snore]</span> 呃，乌托马乌托马他要跟我们去吗？你要跟我们去吗？
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/snore/1_snore.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/snore/1_snore_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            到门口，这蹲着摘耳朵，再次偷听，就听屋里的。 <span style="color: red;">[snore]</span>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/snore/2_snore.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/snore/2_snore_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            don't thank me yet you must hurry saria sunrise will be here soon <span style="color: red;">[throatclearing]</span>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/throatclearing/1_throatclearing.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/throatclearing/1_throatclearing_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            我是不是随性过头了？ <span style="color: red;">[throatclearing]</span> 第一个环节是回忆过去。
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/throatclearing/2_throatclearing.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/throatclearing/2_throatclearing_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            他骗了我好几十万呢，我的棺材本全都搭进去了，然后然后他人就不见了，到警也找不到。 <span style="color: red;">[crying]</span>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/crying/1_crying.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/crying/1_crying_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            <span style="color: red;">[crying]</span> 不要，王林说好的，我俩一块走的，我不要一个人走。
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/crying/2_crying.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/crying/2_crying_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            啊，这都画的啥呀， <span style="color: red;">[breath]</span> 不是你是小学生上语文课吗？又是卡通小人，又是图句号的。哎呀，行，男主名字，后面还写了个全剧最帅。
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/breath/1_breath.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/breath/1_breath_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            <span style="color: red;">[breath]</span> 小孩子的把戏水做的枪也想杀人。
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/breath/2_breath.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/breath/2_breath_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            李渊看着秦琼心说，这是我的金殿哪，他在这儿就指着我两个儿子，让我两个儿子心服口服。哎呀。李渊心说， <span style="color: red;">[sniff]</span><span style="color: red;">&lt;B&gt;</span> 大唐江山要紧， <span style="color: red;">&lt;/B&gt;</span> 我也不能再包庇我的两个儿子了。哎呀，是世民，你也给我跪下。
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/sniff/1_sniff.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/sniff/1_sniff_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            <span style="color: red;">[sniff]</span> 说什么呢？我是说韩长老青通药理，韩家又一直盯着我不放，有没有可能是冲着我身上的某种东西来的。
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/sniff/2_sniff.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/sniff/2_sniff_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            <span style="color: red;">[laughing]</span> 我们来助早齿大人一臂之力。
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/laughing/1_laughing.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/laughing/1_laughing_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            女娲说完一笑，便直接转身离开了后院。而蚩尤则是愣住了片刻， <span style="color: red;">[laughing]</span><span style="color: red;">&lt;B&gt;</span> 随即仰天大笑。 <span style="color: red;">&lt;/B&gt;</span> 女娲，你果然厉害呀。
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/laughing/2_laughing.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/laughing/2_laughing_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            先生，您好歹吃点东西吧，再难受，也不能不吃东西。 <span style="color: red;">[coughing]</span>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/coughing/1_coughing.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/coughing/1_coughing_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            你去嗯嗯大人，我该注意些什么？ <span style="color: red;">[coughing]</span>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/coughing/2_coughing.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/coughing/2_coughing_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            Heya, kids. The vet reported your dog is a biter, so I'm supposed to wait until animal control gets here to take him away. <span style="color: red;">[gasp]</span>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/gasp/1_gasp.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/gasp/1_gasp_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            <span style="color: red;">[gasp]</span><span style="color: red;">&lt;B&gt;</span> 这是怎么回事？ <span style="color: red;">&lt;/B&gt;</span>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/gasp/2_gasp.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/gasp/2_gasp_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            <span style="color: red;">[yawn]</span> 好久没有熬夜了，好困啊。
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/yawn/1_yawn.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/yawn/1_yawn_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            <span style="color: red;">[yawn]</span> 妖怪，你才是妖怪呢。
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/yawn/2_yawn.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/yawn/2_yawn_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            杨总，我知道数的都是雷政委的名字，没关系，以我的身份没有权利，拥有什么研究成果的，让你受委屈了。没事的， <span style="color: red;">[sigh]</span><span style="color: red;">&lt;B&gt;</span> 能在红暗基地做研究， <span style="color: red;">&lt;/B&gt;</span> 能看到这么丰富的资料。
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/sigh/1_sigh.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/sigh/1_sigh_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="width: 220px; vertical-align: middle; text-align: center; background-color: white; z-index: 1;">
-                            <span style="color: red;">[sigh]</span><span style="color: red;">&lt;B&gt;</span>  They say time flies when you're having fun, <span style="color: red;">&lt;/B&gt;</span>  so...
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/sigh/2_sigh.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                          <td style="vertical-align: middle; text-align: center;">
-                            <audio controls style="width: 190px;">
-                              <source src="./dataset_demos/sigh/2_sigh_segment.wav" />
-                              Your browser does not support the audio element.
-                            </audio>
-                          </td>
-                        </tr>
-                      </tbody>
-                      
-                </table>
-            </div>
-        </div>
-</div>
 
 
 </article>
