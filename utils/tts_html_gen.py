@@ -2,11 +2,22 @@ import html
 from pathlib import Path
 
 models = {
-    "ref": "Prompt", "dia": "Dia", "cosyvoice2": "CosyVoice2", "f5tts": "F5-TTS",
-    "capspeech": "F5-TTS + <br> Capspeech", "nonverbaltts": "F5-TTS + <br> NonVerbalTTS", "nonverbalspeech38k": "F5-TTS + <br> NonVerbalSpeech-38K (Ours)", "refined_aligned": "F5-TTS + <br> NonVerbalSpeech-38K (Ours) + <br> Refined + Aligned"
+    "ref": "Prompt",
+    "dia": "Dia",
+    "cosyvoice2": "CosyVoice2",
+    "f5tts": "F5-TTS",
+    "capspeech": "F5-TTS + <br> CapSpeech",
+    "nonverbaltts": "F5-TTS + <br> NonVerbalTTS",
+    "smiip_nv": "F5-TTS + <br> SMIIP-NV",
+    "mnv_17": "F5-TTS + <br> MNV-17",
+    "synparaspeech": "F5-TTS + <br> SynParaSpeech",
+    "nvspeech170k": "F5-TTS + <br> NVSpeech",
+    "nonverbalspeech38k_tbo": "F5-TTS + <br> NonVerbalSpeech-38K (TBO) (Ours)",
+    "nonverbalspeech38k_tsa": "F5-TTS + <br> NonVerbalSpeech-38K (TSA) (Ours)",
 }
 
-language = "en"  # Change to "zh" for Chinese
+
+language = "zh"  # Change to "zh" for Chinese
 
 transcript_path = f"./audios/{language}/transcript.txt"
 
@@ -54,8 +65,8 @@ thead_html += '</thead>'
 
 for filename, text in transcript.items():
     # if the text contains < or >, highlight it the content within <>
-    assert "<" in text or ">" in text, f"Text does not contain < or >: {text}"
-    if '<' in text or '>' in text:
+    assert "<" in text and ">" in text, f"Text does not contain < or >: {text}"
+    if '<' in text and '>' in text:
         # text = text.replace('<', '&lt;').replace('>', '&gt;')
         # text = text.replace('&lt;', '<span style="color: red;">&lt;')
         # text = text.replace('&gt;', '&gt;</span>')

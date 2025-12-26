@@ -1,2 +1,2 @@
 1| Heya, kids. The vet reported your dog is a biter, so I'm supposed to wait until animal control gets here to take him away. [gasp] |Hey, kids, the vet reported your dog is a biter, so I'm supposed to wait until animal control gets here to take him away. [gasp]<B> What? </B>
-2| [gasp]<B> 这是怎么回事？</B> |这是怎么回事[gasp]啊，你了。
+2| 这是怎么[gasp]<B>回事？</B> |这是怎么回事[gasp]啊，你了。

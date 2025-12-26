@@ -81,12 +81,14 @@ for text, text_refined, audio_path, audio_segment in zip(text_list, text_refined
     # 第二行：合并两列，放 caption
     row += f'  <tr>\n'
     row += f'    <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">\n'
-    row += f'      <div><b style="white-space: pre;">                    Original:</b> {text}</div>\n'
+    # row += f'      <div><b style="white-space: pre;">                    Original:</b> {text}</div>\n'
+    row += f'      <div><b> Timestamp-Based Ordering (TBO): </b> {text}</div>\n'
     row += f'    </td>\n'
     row += f'  </tr>\n'
     row += f'  <tr>\n'
     row += f'    <td colspan="2" style="text-align: left; white-space: normal; word-wrap: break-word; background-color: #f9f9f9;">\n'
-    row += f'      <div><b>Refined + Aligned:</b> {text_refined}</div>\n'
+    # row += f'      <div><b>Refined + Aligned:</b> {text_refined}</div>\n'
+    row += f'      <div><b> Temporal-Semantic Alignment (TSA) :</b> {text_refined}</div>\n'
     row += f'    </td>\n'
     row += f'  </tr>\n'
 

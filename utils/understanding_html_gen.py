@@ -3,12 +3,35 @@ from pathlib import Path
 import json
 import sys
 
-models = {
-    "nonverbaltts": "GT (NonVerbalTTS)", "whisper_large_v3": "Whisper-Large-V3", "qwen2audio": "Qwen2-Audio", 
-    "capspeech": "Qwen2-Audio + <br> CapSpeech", "nonverbalspeech38k": "Qwen2-Audio + <br> NonVerbalSpeech38K (Ours)", "refined_aligned": "Qwen2-Audio + <br> NonVerbalSpeech-38K (Ours) + <br> Refined + Aligned"
-}
+# en setting
+# models = {
+#     "nonverbaltts": "GT (NonVerbalTTS)",
+#     "qwen2audio": "Qwen2-Audio",
+#     "capspeech_qwen2": "Qwen2-Audio + <br> CapSpeech",
+#     "tbo_qwen2": "Qwen2-Audio + <br> NonVerbalSpeech-38K(TBO) (Ours)",
+#     "tsa_qwen2": "Qwen2-Audio + <br> NonVerbalSpeech-38K(TSA) (Ours)",
+#     "whisper_large_v3": "Whisper-Large-V3",
+#     "capspeech_whisper": "Whisper-Large-V3 + <br> CapSpeech",
+#     "tbo_whisper": "Whisper-Large-V3 + <br> NonVerbalSpeech-38K(TBO) (Ours)",
+#     "tsa_whisper": "Whisper-Large-V3 + <br> NonVerbalSpeech-38K(TSA) (Ours)",
+# }
+# file_dir = "nv_caption/en_settting"
+# idx_list = [0, 1, 4]
 
-file_dir = "./texts"
+# zh setting
+models = {
+    "smiip_nv_mnv_17": "GT (SMIIP-NV|MNV-17)",
+    "qwen2audio": "Qwen2-Audio",
+    "nvspeech_qwen2": "Qwen2-Audio + <br> NVSpeech",
+    "tbo_qwen2": "Qwen2-Audio + <br> NonVerbalSpeech-38K(TBO) (Ours)",
+    "tsa_qwen2": "Qwen2-Audio + <br> NonVerbalSpeech-38K(TSA) (Ours)",
+    "whisper_large_v3": "Whisper-Large-V3",
+    "nvspeech_whisper": "Whisper-Large-V3 + <br> NVSpeech",
+    "tbo_whisper": "Whisper-Large-V3 + <br> NonVerbalSpeech-38K(TBO) (Ours)",
+    "tsa_whisper": "Whisper-Large-V3 + <br> NonVerbalSpeech-38K(TSA) (Ours)",
+}
+idx_list = [0, 1, 2]
+file_dir = "nv_caption/zh_settting"
 
 # Escape < and > in the text content
 def escape(text):
@@ -26,7 +49,7 @@ for model in models:
 # sys.exit(0)
 
 # audio_path_pattern = f'texts/audios/{}.wav'
-audio_path_root = 'texts/audios/'
+audio_path_root = f'{file_dir}/audios/'
 
 # Generate HTML table content
 rows = []
@@ -42,6 +65,8 @@ rows.append(header_row)
 
 # Subsequent rows: model name and corresponding text for each model
 for idx in range(len(next(iter(transcript.values())))):
+    if idx not in idx_list:
+        continue
     # First row for the audio
     audio_row = f'  <tr>\n'
     audio_path = f'{audio_path_root}/{idx}.wav'
